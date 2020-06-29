@@ -4,34 +4,34 @@ namespace bingMap;
 class Marker
 {
     use MapPosition;
-    private int $ID;
-    private ?InfoBox $InfoBox = null;
-    private ?string $IconPath = null;
-    private ?string $Base64Icon = null;
-    private ?string $IconVariable = null;
+    private $ID;
+    private  $InfoBox = null;
+    private  $IconPath = null;
+    private  $Base64Icon = null;
+    private  $IconVariable = null;
    
     private static string $Suffix = "Marker";
 
-    public function __construct(int $ID)
+    public function __construct($ID)
     {
         $this->ID = $ID;
     }
-    public static function create(int $ID)
+    public static function create($ID)
     {
         return new Marker($ID);
     }
-    public function SetInfoBox(InfoBox $InfoBox)
+    public function SetInfoBox($InfoBox)
     {
         $InfoBox->SetID($this->ID);
         $this->InfoBox = $InfoBox;
         return $this;
     }
-    public function SetIconURL(string $IconPath)
+    public function SetIconURL($IconPath)
     {
         $this->IconPath = $IconPath;
         return $this;
     }
-    public function SetBase64Icon(string $Base64)
+    public function SetBase64Icon($Base64)
     {
         $this->Base64Icon = $Base64;
         return $this;

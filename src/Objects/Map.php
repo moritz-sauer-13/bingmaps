@@ -9,53 +9,53 @@ class Map extends ViewableData
 {
     use MapPosition;
 
-    private bool $Debug;
-    private string $ID;
-    private string $Style;
-    private string $loadOnStartClass;
-    private ?string $IconPath = null;
-    private ?string $Base64Icon = null;
-    private bool $CenterOnPins = true;
-    private int $Padding = 50;
+    private $Debug;
+    private $ID;
+    private $Style;
+    private $loadOnStartClass;
+    private $IconPath = null;
+    private $Base64Icon = null;
+    private $CenterOnPins = true;
+    private $Padding = 50;
     private $Markers = [];
-    private ?int $Zoom = null;
+    private $Zoom = null;
 
-    public function __construct(string $ID = "1", string $loadOnStartClass = "", $Debug = false)
+    public function __construct($ID = "1", $loadOnStartClass = "", $Debug = false)
     {
         $this->Debug = $Debug;
         $this->loadOnStartClass = $loadOnStartClass;
         $this->ID = $ID;
     }
-    public static function create(string $ID = "1", string $loadOnStartClass = "", $Debug = false)
+    public static function create($ID = "1", $loadOnStartClass = "", $Debug = false)
     {
         return new Map($ID, $loadOnStartClass, $Debug);
     }
-    public function SetCenterOnPins(bool $value)
+    public function SetCenterOnPins( $value)
     {
         $this->CenterOnPins = $value;
         return $this;
     }
-    public function SetZoom(int $value)
+    public function SetZoom($value)
     {
         $this->Zoom = $value;
         return $this;
     }
-    public function SetIcon(string $IconPath)
+    public function SetIcon($IconPath)
     {
         $this->IconPath = $IconPath;
         return $this;
     }
-    public function SetCenterOnPinsPadding(int $value)
+    public function SetCenterOnPinsPadding($value)
     {
         $this->Padding = $value;
         return $this;
     }
-    public function SetBase64Icon(string $Base64)
+    public function SetBase64Icon($Base64)
     {
         $this->Base64Icon = $Base64;
         return $this;
     }
-    public function SetStyle(string $style)
+    public function SetStyle( $style)
     {
         $this->Style = $style;
         return $this;
@@ -64,7 +64,7 @@ class Map extends ViewableData
     {
         return $this->loadOnStartClass != "";
     }
-    public function AddMarker(Marker $marker)
+    public function AddMarker($marker)
     {
         array_push($this->Markers, $marker);
     }

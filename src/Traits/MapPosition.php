@@ -8,7 +8,7 @@ trait MapPosition
 {
     protected $Coords;
 
-    public function SetPosition(Coordinates $coords)
+    public function SetPosition($coords)
     {
         $this->Coords = $coords;
         return $this;

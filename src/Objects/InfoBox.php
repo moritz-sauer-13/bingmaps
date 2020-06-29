@@ -10,12 +10,12 @@ class InfoBox
 {
     use MapPosition;
     
-    private int $ID;
-    private ?string $Title = null;
-    private ?string $Description = null;
-    private bool $InitialVisibility = false;
-    private ?string $HTMLContent = null;
-    private static string $Suffix = "InfoBox";
+    private $ID;
+    private $Title = null;
+    private $Description = null;
+    private $InitialVisibility = false;
+    private  $HTMLContent = null;
+    private static $Suffix = "InfoBox";
 
     public function __construct()
     {
@@ -26,32 +26,32 @@ class InfoBox
         return new InfoBox();
     }
     //Will be set by Marker to make JS code more readable
-    public function SetID(int $ID)
+    public function SetID($ID)
     {
         $this->ID = $ID;
         return $this;
     }
-    public function SetTitle(string $Title)
+    public function SetTitle($Title)
     {
         $this->Title = $Title;
         return $this;
     }
-    public function SetDescription(string $Description)
+    public function SetDescription($Description)
     {
         $this->Description = $Description;
         return $this;
     }
-    public function SetHTMLContent(string $HTMLContent)
+    public function SetHTMLContent($HTMLContent)
     {
         $this->HTMLContent = $HTMLContent;
         return $this;
     }
-    public function SetInitialVisibility(bool $InitialVisibility)
+    public function SetInitialVisibility($InitialVisibility)
     {
         $this->InitialVisibility = $InitialVisibility;
         return $this;
     }
-    public function hasID(int $ID)
+    public function hasID($ID)
     {
         return $this->ID == null;
     }
