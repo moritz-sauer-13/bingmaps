@@ -10,7 +10,7 @@ class Marker
     private  $Base64Icon = null;
     private  $IconVariable = null;
    
-    private static string $Suffix = "Marker";
+    private static $Suffix = "Marker";
 
     public function __construct($ID)
     {

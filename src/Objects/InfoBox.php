@@ -14,7 +14,7 @@ class InfoBox
     private $Title = null;
     private $Description = null;
     private $InitialVisibility = false;
-    private  $HTMLContent = null;
+    private $HTMLContent = null;
     private static $Suffix = "InfoBox";
 
     public function __construct()
