@@ -42,9 +42,9 @@ and enter it inside the SiteConfig of your page.
     ->SetHTMLContent($HTML) // (Semi-Optional) In case you want to use a Custom InfoBox in this case add your own HTMLInfoBox.ss template adapt original one in Module
     ->SetInitialVisibility(true) // If you want to display Infobox from the get go
     ->SetPosition($Marker->GetPosition()) // Generally want to take the same as $Marker but can simply supply own Coordinates Object
-    
-    Coordinates::GetCoordinates($Latitude,$Longitude) // creates a Coordinates object with both values
-    Coordinates::GetCoordinatesFromAddress(/*string*/ $Address) // creates a Coordinates object after querying Bing for Lat/Lng from Address
+    ;
+    Coordinates::GetCoordinates($Latitude,$Longitude); // creates a Coordinates object with both values
+    Coordinates::GetCoordinatesFromAddress(/*string*/ $Address); // creates a Coordinates object after querying Bing for Lat/Lng from Address
 
     return $map; // return Map object to Template remember to use $MapVariable.RAW in Template
 ```
