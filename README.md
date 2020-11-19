@@ -25,7 +25,8 @@ and enter it inside the SiteConfig of your page.
         ->SetIcon($IconURL)// Renders Icon with Url from Web (might not work localy) (Priority 1)
         ->SetBase64Icon($Icon)// Renders Icon with Base64 StringFormat "data:image/png;base64,$base64Data" adapt image/png to your needs (Priority 2)
         ->SetCenterOnPins(false) //Optional default true - adds Script that centers Map so all Pins are visible
-        ->SetCenterOnPinsPadding(40) //Optional default 50 - adds Padding to pin centering map
+        ->SetCenterOnPinsPadding(40) //Optional default 50 - adds Padding to pin centering map (only works without SetCenterOnPins(false))
+        ->SetZoom(5) //use With SetCenterOnPins(false)
         ;
     $Marker = bingMap\Marker::create($ID) //$ID - Some Number must be unique for all Markers
             ->SetPosition(bingMap\Coordinates::GetCoordinatesFromAddress("Teststreet 39 AreaCode AreaName"))
