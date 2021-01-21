@@ -24,7 +24,7 @@ class Coordinates
     {
         $APIKey = SiteConfig::current_site_config()->bingAPIKey;
         if ($APIKey == "") {
-            throw new Exception("No API Key Found");
+            throw new \Exception("No API Key Found");
         }
         $addressLine = str_ireplace(" ", "%20", $Address);
         $request = "http://dev.virtualearth.net/REST/v1/Locations?addressLine=$addressLine&key=$APIKey&output=xml";
