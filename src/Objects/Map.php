@@ -26,7 +26,7 @@ class Map extends ViewableData
         $this->loadOnStartClass = $loadOnStartClass;
         $this->ID = $ID;
     }
-    public static function create($ID = "1", $loadOnStartClass = "", $Debug = false)
+    public static function createMap($ID = "1", $loadOnStartClass = "", $Debug = false)
     {
         return new Map($ID, $loadOnStartClass, $Debug);
     }
