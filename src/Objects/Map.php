@@ -12,6 +12,8 @@ class Map extends ViewableData
     private $Debug;
     private $ID;
     private $Style;
+    private $Height = 500;
+    private $Width = 500;
     private $loadOnStartClass;
     private $IconPath = null;
     private $Base64Icon = null;
@@ -26,7 +28,7 @@ class Map extends ViewableData
         $this->loadOnStartClass = $loadOnStartClass;
         $this->ID = $ID;
     }
-    public static function create($ID = "1", $loadOnStartClass = "", $Debug = false)
+    public static function createMap($ID = "1", $loadOnStartClass = "", $Debug = false)
     {
         return new Map($ID, $loadOnStartClass, $Debug);
     }
@@ -60,6 +62,16 @@ class Map extends ViewableData
         $this->Style = $style;
         return $this;
     }
+    public function SetHeight($pixel)
+    {
+        $this->Height = $pixel;
+        return $this;
+    }
+    public function SetWidth($pixel)
+    {
+        $this->Width = $pixel;
+        return $this;
+    }
     public function HasLoadOnStartClass()
     {
         return $this->loadOnStartClass != "";
@@ -78,7 +90,7 @@ class Map extends ViewableData
         return [
             "Script" => $this->RenderFunction(),
             "ID" => $this->ID,
-            "Style" => $this->Style,
+            "Styles" => $this->Style,
         ];
     }
     public function GetLoadOnStartClass()
@@ -177,6 +189,34 @@ class Map extends ViewableData
         }
 
         return $rendered;
+    }
+    
+    private function GetMarkersData()
+    {
+        $MarkersData = [];
+        $iconPath = $this->IconPath;
+        foreach($this->Markers as $Marker)
+        {
+            $MarkersData[] = $Marker->GetReactData($iconPath);
+        }
+        return $MarkersData;
+    }
+    public function GetReactData()
+    {
+        $data = [
+            "key" => $this->ID,
+            "loadOnStartClass"  =>  $this->loadOnStartClass,
+            "centerOnPins"  =>  $this->CenterOnPins,
+            "padding"   =>  $this->Padding,
+            "markers"   => $this->GetMarkersData(),
+            "zoom"  =>  $this->Zoom,
+            "position"  =>  $this->Coords->GetReactData(),
+        ];
+        return $data;
+    }
+    public function GetJSONReactData()
+    {
+        return json_encode($this->GetReactData());
     }
 
 }

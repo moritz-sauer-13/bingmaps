@@ -52,5 +52,12 @@ class Coordinates
     {
         return is_numeric($this->Latitude) && is_numeric($this->Longitude);
     }
+    public function GetReactData()
+    {
+        return [
+            "latitude" => $this->GetLatitude(),
+            "longitude" => $this->GetLongitude(),
+        ];
+    }
 
 }

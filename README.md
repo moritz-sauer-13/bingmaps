@@ -48,5 +48,8 @@ and enter it inside the SiteConfig of your page.
     Coordinates::GetCoordinatesFromAddress(/*string*/ $Address); // creates a Coordinates object after querying Bing for Lat/Lng from Address
 
     return $map; // return Map object to Template remember to use $MapVariable.RAW in Template
+
+    alternatively you can also use the React component and get the data it needs with $map->GetReactData();
+    If you need the data as JSON you can use $map->GetJSONReactData; (simple json_encode version of GetReactData() result for convenience)
 ```
 

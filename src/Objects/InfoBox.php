@@ -76,6 +76,15 @@ class InfoBox
     {
         if($this->HTMLContent != null)
         {
+            $rendered = $this->getRenderedHTMLContent();
+            return "htmlContent: '{$rendered}',";
+        }
+        return "";
+    }
+    private function getRenderedHTMLContent()
+    {
+        if($this->HTMLContent != null)
+        {
             $renderer = new ViewableData();
             $rendered = $renderer->customise([
                 "HTMLContent"   => $this->HTMLContent,
@@ -83,7 +92,7 @@ class InfoBox
                 "ID"    =>  $this->ID
             ])->renderWith("HTMLInfoBox");
             $rendered = HelperMethods::prepareJavascriptString($rendered);
-            return "htmlContent: '{$rendered}',";
+            return $rendered;
         }
         return "";
     }
@@ -132,5 +141,20 @@ class InfoBox
         return "console.log('Skipping Invalid Coordinates');\n";
         
     }
-
+    public function GetReactData()
+    {
+        //we don't want to return false data that has no position to prevent map from not working at all
+        if(!$this->IsValidCoordinate())
+        {
+            return null;
+        }
+        return [
+            "key" => $this->ID,
+            "title" => $this->Title,
+            "description" => $this->Description,
+            "initialVisibility" => $this->InitialVisibility,
+            "htmlContent"   =>  $this->getRenderedHTMLContent(),
+            "coordinates"   => $this->GetPosition()->GetReactData()
+        ];
+    }
 }

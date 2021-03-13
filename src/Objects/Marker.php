@@ -1,15 +1,16 @@
 <?php
 namespace bingMap;
+
 // Corresponds to BING Pushpin
 class Marker
 {
     use MapPosition;
     private $ID;
-    private  $InfoBox = null;
-    private  $IconPath = null;
-    private  $Base64Icon = null;
-    private  $IconVariable = null;
-   
+    private $InfoBox = null;
+    private $IconPath = null;
+    private $Base64Icon = null;
+    private $IconVariable = null;
+
     private static $Suffix = "Marker";
 
     public function __construct($ID)
@@ -48,43 +49,62 @@ class Marker
     }
     private function RenderIcon()
     {
-        if($this->IconPath != null)
-        {
+        if ($this->IconPath != null) {
             return "{icon: '$this->IconPath'}";
         }
-        if($this->Base64Icon != null)
-        {
+        if ($this->Base64Icon != null) {
             return "{icon: '$this->Base64Icon'}";
         }
-        if($this->IconVariable != null)
-        {
+        if ($this->IconVariable != null) {
             return "{icon: $this->IconVariable}";
         }
-        
+
         return "null";
     }
     public function RenderInfoBoxClosingFunction()
     {
-        if($this->InfoBox != null)
-        {
+        if ($this->InfoBox != null) {
             return $this->InfoBox->RenderHTMLCloser();
         }
         return "";
     }
     public function Render($mapVariable)
     {
-        if($this->InfoBox != null && !$this->InfoBox->HasPosition())
-        {
+        if ($this->InfoBox != null && !$this->InfoBox->HasPosition()) {
             $this->InfoBox->SetPosition($this->GetPosition());
         }
         $rendered = "";
-        $rendered .= $this->RenderLocationVariable($this->ID,self::$Suffix)."\n";
-        $rendered .= "var pushpin$this->ID = new Microsoft.Maps.Pushpin({$this->GetLocationVariable($this->ID,self::$Suffix)},{$this->RenderIcon()});\n";
-        if($this->InfoBox != null)
-        {
-            $rendered .= $this->InfoBox->Render($mapVariable,"pushpin$this->ID");
+        $rendered .= $this->RenderLocationVariable($this->ID, self::$Suffix) . "\n";
+        $rendered .= "var pushpin$this->ID = new Microsoft.Maps.Pushpin({$this->GetLocationVariable($this->ID, self::$Suffix)},{$this->RenderIcon()});\n";
+        if ($this->InfoBox != null) {
+            $rendered .= $this->InfoBox->Render($mapVariable, "pushpin$this->ID");
         }
         $rendered .= "{$mapVariable}.entities.push(pushpin$this->ID);\n";
         return $rendered;
+    }
+    private function GetInfoBoxData()
+    {
+        return $this->InfoBox->GetReactData();
+    }
+    public function GetReactData($iconPath = "")
+    {
+        if (!$this->IsValidCoordinate()) {
+            return null;
+        }
+        $icon = $this->IconPath;
+        if($icon == "")
+        {
+            $icon = $iconPath;
+        }
+        $data = [
+            "key" => $this->ID,
+            "icon" => $icon,
+            "coordinates" => $this->GetPosition()->GetReactData()
+        ];
+        if($this->InfoBox != null)
+        {
+            $data["infobox"] = $this->GetInfoBoxData();
+        }
+        return $data;
     }
 }

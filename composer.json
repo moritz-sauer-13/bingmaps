@@ -15,5 +15,11 @@
       "psr-4": {
         "bingmaps\\": "src/"
       }
+    },
+    "extra": {
+      "expose": [
+          "client/js/react"
+      ]
     }
 }
+  
