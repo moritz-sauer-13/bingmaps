@@ -19,7 +19,7 @@ and enter it inside the SiteConfig of your page.
     //$ID - In case there are multiple Maps on one Page and that causes Problems
     //$loadOnStartClass - In case you want to wait for pageLoad to reduce initial page Loading times then afterwards enable Scriptblock via JS
     //$Debug - true disables minification/removing redundant spaces and new line characters
-    $map = bingMap\Map::create() // 
+    $map = bingMap\Map::createMap() // 
         ->SetPosition(bingMap\Coordinates::GetCoordinates($Latitute,$Longitude)) //Optional if you just want to display a map without pins to center maps at Coordinates
         ->SetStyle("width:100%;height:400px;position:relative;") //Required CSS-Style of the container of the map
         ->SetIcon($IconURL)// Renders Icon with Url from Web (might not work localy) (Priority 1)
