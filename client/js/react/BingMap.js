@@ -97,7 +97,7 @@ class BingMap extends React.Component{
                 {
                     options.htmlContent = Marker.infobox.htmlContent;
                 }
-                options.visible = true;
+                options.visible = Marker.infobox.initialVisibility;
                 var infobox = new Microsoft.Maps.Infobox(location, options);
                 infobox.setMap(map);
                 infoboxes.push(infobox);
@@ -118,13 +118,19 @@ class BingMap extends React.Component{
             infoboxes[index].setOptions({visible:true});
         }
     }
+    componentDidUpdate(prevProps,prevState,snapsho)
+    {
+        if(this.props.Position.latitude != 0 && this.props.Position.latitude != 0)
+        {
+            this.setMapCenter(this.props.Data.position);
+        }
+    }
     MapCallBack(e)
     {
-        console.log(this.props.Data);
         //TODO do away with complete initialization of map and do it step by step with functions etc that only trigger if they should be triggerd
         //take https://github.com/iniamudhan/react-bingmaps/blob/dev/src/node_modules/components/ReactBingmaps/ReactBingmaps.js as an example
         map = new Microsoft.Maps.Map(this.mapRef.current);
-        if(this.props.Data.position.latitude != 0 && this.props.Data.position.latitude != 0)
+        if(this.props.Position.latitude != 0 && this.props.Position.latitude != 0)
         {
             this.setMapCenter(this.props.Data.position);
         }
@@ -133,7 +139,7 @@ class BingMap extends React.Component{
             this.setMarkers(this.props.Data.markers,map);
             this.setInfoBoxes(this.props.Data.markers,map);
         }
-        if(this.props.Data.centerOnPins)
+        if(this.props.CenterOnPins)
         {
             this.CenterOnPins();
         }        
@@ -148,6 +154,7 @@ class BingMap extends React.Component{
         
     }
     render(){
+        console.log("test");
         return (
             <div>
                 <div style={{width:this.props.Width,height:this.props.Height}} ref={this.mapRef}></div>
