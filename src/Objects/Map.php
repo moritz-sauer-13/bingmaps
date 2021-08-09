@@ -1,9 +1,9 @@
 <?php
 namespace bingMap;
 
-use bingMap\MapPosition;
-use SilverStripe\Dev\Debug;
-use SilverStripe\View\ViewableData;
+//use bingMap\MapPosition;
+//use SilverStripe\Dev\Debug;
+//use SilverStripe\View\ViewableData;
 
 class Map extends ViewableData
 {
